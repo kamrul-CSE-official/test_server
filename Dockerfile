@@ -1,6 +1,6 @@
 FROM node:20
 
-WORKDIR /index
+WORKDIR /app
 
 COPY package.json .
 
@@ -8,6 +8,8 @@ RUN npm install
 
 COPY . .
 
+
 EXPOSE 5000
 
-CMD [ "node", "index.mjs" ]
+
+CMD ["npm", "run", "dev"]
