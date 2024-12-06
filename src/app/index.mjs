@@ -20,15 +20,15 @@ const dummyUser = {
 const JWT_SECRET = "your_jwt_secret_key";
 
 app.get("/", async (req, res) => {
-  res.send("Hi server is runing....🏃‍♀️‍➡️");
+  res.send("Bismillah, Hi server is runing....🏃‍♀️‍➡️");
 });
 
 // Route for validating user login and sending JWT token
 app.post("/api/Login/IsValidUserWithJWTToken", async (req, res) => {
-  const { UserName, password } = req.body;
+  const { UserName, Password } = req.body;
 
   if (UserName === dummyUser.username) {
-    const isPasswordValid = (await password) == dummyUser.password;
+    const isPasswordValid = (await Password) == dummyUser.password;
 
     if (isPasswordValid) {
       // Create a JWT token
@@ -50,71 +50,61 @@ app.post("/api/Login/IsValidUserWithJWTToken", async (req, res) => {
 
 // Example protected route (requiring JWT)
 app.get("/api/GatePass/GetUserAccessMenus", (req, res) => {
-  const data = {
-    user: {
-      name: "shadcn",
-      email: "m@example.com",
-      avatar: "/avatars/shadcn.jpg",
+  const data = [
+    {
+      MenuID: 1,
+      MainManuID: 0,
+      MenuName: "Dashboard",
+      MenuType: "dashboard",
+      Icon: "dashboard-icon",
     },
-    teams: [
-      {
-        name: "Naturub",
-        plan: "Accessories Bangladesh",
-      },
-      {
-        name: "Acme Corp.",
-        logo: "AudioWaveform",
-        plan: "Startup",
-      },
-      {
-        name: "Evil Corp.",
-        logo: "Command",
-        plan: "Free",
-      },
-    ],
-    navMain: [
-      {
-        title: "Playground",
-        url: "#",
-        icon: "SquareTerminal",
-        isActive: true,
-        items: [
-          {
-            title: "History",
-            url: "#",
-          },
-          {
-            title: "Starred",
-            url: "#",
-          },
-          {
-            title: "Settings",
-            url: "#",
-          },
-        ],
-      },
-    ],
-    projects: [
-      {
-        name: "Design Engineering",
-        url: "#",
-        icon: "Frame",
-      },
-      {
-        name: "Sales & Marketing",
-        url: "#",
-        icon: "PieChart",
-      },
-      {
-        name: "Travel",
-        url: "#",
-        icon: "Map",
-      },
-    ],
-  };
+    {
+      MenuID: 2,
+      MainManuID: 0,
+      MenuName: "Reports",
+      MenuType: "reports",
+      Icon: "reports-icon",
+    },
+    {
+      MenuID: 3,
+      MainManuID: 2,
+      MenuName: "Sales Report",
+      MenuType: "sales-report",
+      Icon: "sales-icon",
+    },
+    {
+      MenuID: 4,
+      MainManuID: 2,
+      MenuName: "Inventory Report",
+      MenuType: "inventory-report",
+      Icon: "inventory-icon",
+    },
+    {
+      MenuID: 5,
+      MainManuID: 0,
+      MenuName: "Settings",
+      MenuType: "settings",
+      Icon: "settings-icon",
+    },
+    {
+      MenuID: 6,
+      MainManuID: 5,
+      MenuName: "User Management",
+      MenuType: "user-management",
+      Icon: "user-management-icon",
+    },
+    {
+      MenuID: 7,
+      MainManuID: 5,
+      MenuName: "Role Management",
+      MenuType: "role-management",
+      Icon: "role-management-icon",
+    },
+  ];
 
   res.json(data);
 });
+
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
